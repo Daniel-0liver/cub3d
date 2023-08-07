@@ -1,2 +1,2 @@
 # cub3d
-##42 Project
+## 42 Project
