@@ -1,0 +1,30 @@
+{
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "cub3d",
+			"command": "/usr/bin/g++",
+			"args": [
+				"-fdiagnostics-color+always",
+				"std=c++11",
+				"-g",
+				"${workspaceFolder}/obj/*.o",
+				"${workspaceFolder}/**/*.o",
+				"-o",
+				"${workspaceFolder}/cub3d"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "Taks genetated for the Debug."
+		}
+	],
+	"version": "2.0.0"
+}

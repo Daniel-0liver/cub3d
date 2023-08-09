@@ -6,24 +6,34 @@ NAME		=	cub3d
 
 LFT			=	libft/obj libft/libft.a
 
-HEADER		=	./includes -I ./libft/includes
+MLX			=	mlx/Makefile.gen
+
+HEADER		=	./includes -I ./libft/includes -I ./mlx
 
 OBJ			=	$(patsubst src%, obj%, $(SRC:.c=.o))
 
-SRC			=	src/cub3d.c
+SRC			=	src/cub3d.c \
+				src/game_hook.c \
+				src/game_render.c
+
 
 CC			=	cc
-FLAGS		=	-I${HEADER} -Wall -Wextra -Werror -g #-fsanitize=address
+FLAGS		=	-I${HEADER} #-Wall -Wextra -Werror -g #-fsanitize=address
 
-all:		$(LFT) obj $(NAME) 
+all:		$(MLX) $(LFT) obj $(NAME) 
 
 $(NAME):	$(OBJ)
-			@$(CC) -o $@ $^ $(FLAGS) -L ./libft -lft
+			@$(CC) -o $@ $^ $(FLAGS) -L ./libft -lft -L ./mlx -lmlx -lXext -lX11 -lm
 
 $(LFT):		
 			@@echo " [ .. ] | Compiling libft.."
 			@$(MAKE) -C libft -f Makefile all --no-print-directory
 			@@echo " [ $(GREEN)OK$(RESET) ] | Libft ready!"
+
+$(MLX):
+			@echo " [ .. ] | Compiling minilibx.."
+			@$(MAKE) -s -C mlx -f Makefile all --no-print-directory
+			@echo " [ $(GREEN)OK$(RESET) ] | Minilibx ready!"
 
 obj:
 			@mkdir -p obj
