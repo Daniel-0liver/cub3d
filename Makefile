@@ -14,11 +14,17 @@ OBJ			=	$(patsubst src%, obj%, $(SRC:.c=.o))
 
 SRC			=	src/cub3d.c \
 				src/game_hook.c \
-				src/game_render.c
+				src/game_render.c \
+				src/map_validation/check_map.c \
+				src/map_validation/is_valid_map.c \
+				src/map_validation/get_elements.c \
+				src/map_validation/exit_elements.c \
+				src/map_validation/elements_utils.c \
+				src/map_validation/get_next_line.c
 
 
 CC			=	cc
-FLAGS		=	-I${HEADER} #-Wall -Wextra -Werror -g #-fsanitize=address
+FLAGS		=	-I${HEADER} -g #-Wall -Wextra -Werror #-fsanitize=address
 
 all:		$(MLX) $(LFT) obj $(NAME) 
 
@@ -36,7 +42,7 @@ $(MLX):
 			@echo " [ $(GREEN)OK$(RESET) ] | Minilibx ready!"
 
 obj:
-			@mkdir -p obj
+			@mkdir -p obj/map_validation
 
 obj/%.o:	src/%.c ./includes/cub3d.h
 			@$(CC) $(FLAGS) -o $@ -c $<

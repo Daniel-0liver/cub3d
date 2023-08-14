@@ -1,0 +1,16 @@
+NO ./images/wood.xpm
+SO ./images/greystone.xpm
+WE ./images/colorstone.xpm
+EA ./images/mossy.xpm
+
+C 231,236,249
+F 74,41,41
+
+
+11 1 1111 11
+101011111001
+1000000001111
+100110N0001
+1101000001011
+10000000001
+1111111111
