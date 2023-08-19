@@ -24,7 +24,7 @@ SRC			=	src/cub3d.c \
 
 
 CC			=	cc
-FLAGS		=	-I${HEADER} -g #-Wall -Wextra -Werror #-fsanitize=address
+FLAGS		=	-I${HEADER} -g -Wall -Wextra -Werror
 
 all:		$(MLX) $(LFT) obj $(NAME) 
 

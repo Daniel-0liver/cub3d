@@ -28,13 +28,6 @@ void	win_render(void)
 	int	x;
 
 	x = 0;
-	if (game()->frame == 50)
-	{
-		mlx_clear_window(game()->mlx, game()->win.screen);
-		game()->frame = 0;
-	}
-	else
-		game()->frame++;
 	while (x < game()->win.width)
 	{
 		ray()->camera_x = 2 * x / (double)game()->win.width - 1;
@@ -73,7 +66,7 @@ void	win_render(void)
 				ray()->map_y += ray()->step_y;
 				ray()->side = 1;
 			}
-			if (game()->map[ray()->map_x][ray()->map_y] > 0)
+			if (game()->map[ray()->map_x][ray()->map_y] != '0')
 				ray()->hit = 1;
 		}
 		if (ray()->side == 0)
@@ -87,64 +80,26 @@ void	win_render(void)
 		ray()->draw_end = ray()->line_height / 2 + game()->win.height / 2;
 		if (ray()->draw_end >= game()->win.height)
 			ray()->draw_end = game()->win.height - 1;
-		
-		if (game()->map[(int)game()->pos_y][(int)game()->pos_x] == 1)
-			game()->color = 0xFF0000;
-		if (game()->map[(int)game()->pos_y][(int)game()->pos_x] == 2)
-			game()->color = 0x00FF00;
-		if (game()->map[(int)game()->pos_y][(int)game()->pos_x] == 3)
-			game()->color = 0x0000FF;
-		if (game()->map[(int)game()->pos_y][(int)game()->pos_x] == 4)
-			game()->color = 0xFFFFFF;
-		else
+		if (game()->map[(int)ray()->map_x][ray()->map_y] == '1' && ray()->delta_dist_y >= ray()->delta_dist_x && ray()->dir_ray_x <= ray()->dir_ray_y)
 			game()->color = 0xFFFF00;
-		while (ray()->draw_start <= ray()->draw_end)
+		else if (game()->map[(int)ray()->map_x][ray()->map_y] == 'N')
+			game()->color = 0x00FFFF;
+		else
+			game()->color = 0x3ce83c;
+		int y = 0;
+		while (y <= game()->win.width)
 		{
-			mlx_pixel_put(game()->mlx, game()->win.screen, x, ray()->draw_start, game()->color);
-			ray()->draw_start++;
+			if (y <= ray()->draw_start)
+				mlx_pixel_put(game()->mlx, game()->win.screen, x, y, 0x6770cf);
+			else if (y <= ray()->draw_end && y >= ray()->draw_start)
+			{
+				mlx_pixel_put(game()->mlx, game()->win.screen, x, y, game()->color);
+			}
+			else if (y > ray()->draw_end)
+				mlx_pixel_put(game()->mlx, game()->win.screen, x, y, 0x8f462e);
+			y++;
 		}		
 		x++;
 	}
 	
 }
-
-
-
-
-
-
-
-
-
-	// int x = 0;
-	// int y = 0;
-
-	// while (x < 400)
-	// {
-	// 	y = 0;
-	// 	while (y < 600)
-	// 	{
-	// 		if (y > (200 - game()->distance) && y < 400)
-	// 		{
-	// 			mlx_string_put(game()->mlx, game()->win.screen, x, y, 0xFFFFFFFF, "#");
-	// 			y++;
-	// 		}
-	// 		else
-	// 		{
-	// 			mlx_pixel_put(game()->mlx, game()->win.screen, x, y, 0xFF333333);
-	// 			y++;
-	// 		}
-	// 	} 
-	// 	x++;
-	// }
-	// mlx_mouse_get_pos(game()->mlx, game()->win.screen, &x, &y);
-	// mlx_pixel_put(game()->mlx, game()->win.screen, x, y, 0xFFFFFF00);
-	// mlx_pixel_put(game()->mlx, game()->win.screen, x+10, y+10, 0xFFFFFF00);
-	// mlx_pixel_put(game()->mlx, game()->win.screen, x+10, y+10, 0xFFFFFF00);
-	// mlx_pixel_put(game()->mlx, game()->win.screen, x+10, y+10, 0xFFFFFF00);
-	// mlx_pixel_put(game()->mlx, game()->win.screen, x+20, y+20, 0xFFFFFF00);
-	// mlx_pixel_put(game()->mlx, game()->win.screen, x+20, y+20, 0xFFFFFF00);
-	// mlx_pixel_put(game()->mlx, game()->win.screen, x+20, y+20, 0xFFFFFF00);
-	// mlx_pixel_put(game()->mlx, game()->win.screen, x+30, y+30, 0xFFFFFF00);
-	// mlx_pixel_put(game()->mlx, game()->win.screen, x+30, y+30, 0xFFFFFF00);
-	// mlx_pixel_put(game()->mlx, game()->win.screen, x+30, y+30, 0xFFFFFF00);

@@ -71,7 +71,7 @@ int	split_size(char **split)
 	size = 0;
 	while (split && split[i] != NULL)
 	{
-		if (ft_strlen(split[i]) > size)
+		if ((int)ft_strlen(split[i]) > size)
 			size = ft_strlen(split[i]);
 		i++;
 	}

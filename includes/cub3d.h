@@ -62,6 +62,8 @@ typedef struct s_ray
 typedef struct s_game
 {
 	void		*mlx;
+	void		*img;
+	char		*img_path;
 	t_win		win;
 	int			color;
 	int			frame;

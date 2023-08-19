@@ -42,16 +42,24 @@ int	key_hook(int keycode)
 	}
 	if (keycode == 119 || keycode == 65362) // W and UP
 	{
-		if (!game()->map[(int)(game()->pos_x + game()->dir_x * game()->move_speed)][(int)(game()->pos_y)])
+		// char	check_x = game()->map[(int)(game()->pos_x + game()->dir_x * game()->move_speed)][(int)(game()->pos_y)];
+		// char	check_y = game()->map[(int)(game()->pos_y)][(int)(game()->pos_y + game()->dir_y * game()->move_speed)];
+		// if (check_x != '1' && check_y != '1')
+		// {
 			game()->pos_x += game()->dir_x * game()->move_speed;
-		if (!game()->map[(int)(game()->pos_x)][(int)(game()->pos_y + game()->dir_y * game()->move_speed)])
 			game()->pos_y += game()->dir_y * game()->move_speed;
+		// }
 	}
 	if (keycode == 115 || keycode == 65364) // S and Down
-		if (!game()->map[(int)(game()->pos_x - game()->dir_x * game()->move_speed)][(int)(game()->pos_y)])
+	{
+		// char	check_x = game()->map[(int)(game()->pos_x + game()->dir_x * game()->move_speed)][(int)(game()->pos_y)];
+		// char	check_y = game()->map[(int)(game()->pos_y)][(int)(game()->pos_y + game()->dir_y * game()->move_speed)];
+		// if (check_x != '1' && check_y != '1')
+		// {
 			game()->pos_x -= game()->dir_x * game()->move_speed;
-		if (!game()->map[(int)(game()->pos_x)][(int)(game()->pos_y - game()->dir_y * game()->move_speed)])
 			game()->pos_y -= game()->dir_y * game()->move_speed;
+		// }
+	}
 	return (0);
 }
 

@@ -38,20 +38,22 @@ void	init_var()
 	game()->pos_y = 6;
 	game()->plane_x = 0;
 	game()->plane_y = 0.66;
-	game()->move_speed = 0.1;
+	game()->move_speed = 0.05;
 	game()->rot_speed = 0.05;
 }
 
 int main(int argc, char *argv[])
 {
 	t_element		element;
-
+	int w;
+	int h;
 	element = is_valid_map(argc, argv);
 	game()->map = updted_split(ft_split(element.map, '\n'));
 	for (int i = 0; game()->map[i]; i++)
 		printf("%s\n", game()->map[i]);
 	init_var();
 	game()->win.screen = mlx_new_window(game()->mlx, game()->win.width, game()->win.height, "Cub3D");
+	game()->img = mlx_xpm_file_to_image(game()->mlx, "images/brick_wall-_1_.xpm", &w, &h);
 	get_hooks();
 	mlx_loop(game()->mlx);
 	free_elements(element);
