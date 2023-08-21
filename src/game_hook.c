@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:55:53 by dateixei          #+#    #+#             */
-/*   Updated: 2023/08/14 02:16:44 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/08/21 10:05:17 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,13 @@ int	key_hook(int keycode)
 	}
 	if (keycode == 119 || keycode == 65362) // W and UP
 	{
-		// char	check_x = game()->map[(int)(game()->pos_x + game()->dir_x * game()->move_speed)][(int)(game()->pos_y)];
-		// char	check_y = game()->map[(int)(game()->pos_y)][(int)(game()->pos_y + game()->dir_y * game()->move_speed)];
-		// if (check_x != '1' && check_y != '1')
-		// {
-			game()->pos_x += game()->dir_x * game()->move_speed;
-			game()->pos_y += game()->dir_y * game()->move_speed;
-		// }
+		game()->pos_x += game()->dir_x * game()->move_speed;
+		game()->pos_y += game()->dir_y * game()->move_speed;
 	}
 	if (keycode == 115 || keycode == 65364) // S and Down
 	{
-		// char	check_x = game()->map[(int)(game()->pos_x + game()->dir_x * game()->move_speed)][(int)(game()->pos_y)];
-		// char	check_y = game()->map[(int)(game()->pos_y)][(int)(game()->pos_y + game()->dir_y * game()->move_speed)];
-		// if (check_x != '1' && check_y != '1')
-		// {
-			game()->pos_x -= game()->dir_x * game()->move_speed;
-			game()->pos_y -= game()->dir_y * game()->move_speed;
-		// }
+		game()->pos_x -= game()->dir_x * game()->move_speed;
+		game()->pos_y -= game()->dir_y * game()->move_speed;
 	}
 	return (0);
 }

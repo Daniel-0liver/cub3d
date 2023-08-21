@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:55:33 by dateixei          #+#    #+#             */
-/*   Updated: 2023/08/14 02:33:17 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/08/21 11:18:02 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,22 @@ void	win_render(void)
 				ray()->side = 1;
 			}
 			if (game()->map[ray()->map_x][ray()->map_y] != '0')
+			{
 				ray()->hit = 1;
+				if (ray()->side == 0)
+				{
+					if (ray()->step_x == -1)
+						ray()->draw_side = 0;
+					else
+						ray()->draw_side = 1;
+					
+				}
+				else
+					if (ray()->step_y == -1)
+						ray()->draw_side = 2;
+					else
+						ray()->draw_side = 3;
+			}
 		}
 		if (ray()->side == 0)
 			ray()->perp_wall_dist = (ray()->map_x - game()->pos_x + (1 - ray()->step_x) / 2) / ray()->dir_ray_x;
@@ -80,12 +95,16 @@ void	win_render(void)
 		ray()->draw_end = ray()->line_height / 2 + game()->win.height / 2;
 		if (ray()->draw_end >= game()->win.height)
 			ray()->draw_end = game()->win.height - 1;
-		if (game()->map[(int)ray()->map_x][ray()->map_y] == '1' && ray()->delta_dist_y >= ray()->delta_dist_x && ray()->dir_ray_x <= ray()->dir_ray_y)
-			game()->color = 0xFFFF00;
-		else if (game()->map[(int)ray()->map_x][ray()->map_y] == 'N')
-			game()->color = 0x00FFFF;
+		if (ray()->draw_side == 0 && game()->map[(int)ray()->map_x][ray()->map_y] == '1')
+			game()->color = 0xfc5e03;
+		else if (ray()->draw_side == 1 && game()->map[(int)ray()->map_x][ray()->map_y] == '1')
+			game()->color = 1; 
+		else if(ray()->draw_side == 2 && game()->map[(int)ray()->map_x][ray()->map_y] == '1')
+			game()->color = 0x372491;
+		else if(ray()->draw_side == 3 && game()->map[(int)ray()->map_x][ray()->map_y] == '1')
+			game()->color = 0xb51991;
 		else
-			game()->color = 0x3ce83c;
+			game()->color = 0xc40a23;
 		int y = 0;
 		while (y <= game()->win.width)
 		{
@@ -93,13 +112,22 @@ void	win_render(void)
 				mlx_pixel_put(game()->mlx, game()->win.screen, x, y, 0x6770cf);
 			else if (y <= ray()->draw_end && y >= ray()->draw_start)
 			{
-				mlx_pixel_put(game()->mlx, game()->win.screen, x, y, game()->color);
+				if (game()->color == 1)
+				{
+					mlx_put_image_to_window(game()->mlx, game()->win.screen, game()->img, x, y);
+					y += 64;
+				}
+				else
+					mlx_pixel_put(game()->mlx, game()->win.screen, x, y, game()->color);
+				
 			}
 			else if (y > ray()->draw_end)
 				mlx_pixel_put(game()->mlx, game()->win.screen, x, y, 0x8f462e);
 			y++;
-		}		
-		x++;
+		}
+		if (game()->color == 1)
+			x += 64;
+		else	
+			x++;
 	}
-	
 }

@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 02:24:18 by dateixei          #+#    #+#             */
-/*   Updated: 2023/08/14 02:32:52 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/08/21 11:18:35 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	init_var()
 {
 	game()->mlx = mlx_init();
 	game()->frame = 0;
-	game()->win.width = 640;
-	game()->win.height = 480;
+	game()->win.width = 1024;
+	game()->win.height =720;
 	game()->dir_x = -1;
 	game()->dir_y = 0;
 	game()->pos_x = 6;
@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
 		printf("%s\n", game()->map[i]);
 	init_var();
 	game()->win.screen = mlx_new_window(game()->mlx, game()->win.width, game()->win.height, "Cub3D");
-	game()->img = mlx_xpm_file_to_image(game()->mlx, "images/brick_wall-_1_.xpm", &w, &h);
+	game()->img = mlx_xpm_file_to_image(game()->mlx, "images/brick_wall.xpm", &w, &h);
 	get_hooks();
 	mlx_loop(game()->mlx);
 	free_elements(element);

@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 01:52:49 by dateixei          #+#    #+#             */
-/*   Updated: 2023/08/12 15:01:41 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/08/21 10:38:48 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_ray
 	int			step_y;
 	int			draw_end;
 	int			draw_start;
+	int			draw_side;
 	int			line_height;
 	double		camera_x;
 	double		dir_ray_x;
