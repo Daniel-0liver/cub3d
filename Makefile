@@ -22,7 +22,6 @@ SRC			=	src/cub3d.c \
 				src/map_validation/elements_utils.c \
 				src/map_validation/get_next_line.c
 
-
 CC			=	cc
 FLAGS		=	-I${HEADER} -g -Wall -Wextra -Werror
 
