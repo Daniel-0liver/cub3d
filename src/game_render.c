@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:55:33 by dateixei          #+#    #+#             */
-/*   Updated: 2023/08/21 11:18:02 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/05 10:34:47 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,14 @@ void	init_ray_var()
 void	win_render(void)
 {
 	int	x;
+	int	y;
 
 	x = 0;
-	while (x < game()->win.width)
+	if (game()->buf == 1)
+		start_buffer();
+	while (x < WIDTH)
 	{
-		ray()->camera_x = 2 * x / (double)game()->win.width - 1;
+		ray()->camera_x = 2 * x / (double)WIDTH - 1;
 		init_ray_var();
 		if (ray()->dir_ray_x < 0)
 		{
@@ -84,50 +87,95 @@ void	win_render(void)
 						ray()->draw_side = 3;
 			}
 		}
+		
 		if (ray()->side == 0)
 			ray()->perp_wall_dist = (ray()->map_x - game()->pos_x + (1 - ray()->step_x) / 2) / ray()->dir_ray_x;
 		else
 			ray()->perp_wall_dist = (ray()->map_y - game()->pos_y + (1 - ray()->step_y) / 2) / ray()->dir_ray_y;
-		ray()->line_height = (int)(game()->win.height / ray()->perp_wall_dist);
-		ray()->draw_start = -ray()->line_height / 2 + game()->win.height / 2;
+		
+		ray()->line_height = (int)(HEIGHT / ray()->perp_wall_dist);
+		
+		ray()->draw_start = -ray()->line_height / 2 + HEIGHT / 2;
 		if (ray()->draw_start < 0)
 			ray()->draw_start = 0;
-		ray()->draw_end = ray()->line_height / 2 + game()->win.height / 2;
-		if (ray()->draw_end >= game()->win.height)
-			ray()->draw_end = game()->win.height - 1;
-		if (ray()->draw_side == 0 && game()->map[(int)ray()->map_x][ray()->map_y] == '1')
-			game()->color = 0xfc5e03;
-		else if (ray()->draw_side == 1 && game()->map[(int)ray()->map_x][ray()->map_y] == '1')
-			game()->color = 1; 
-		else if(ray()->draw_side == 2 && game()->map[(int)ray()->map_x][ray()->map_y] == '1')
-			game()->color = 0x372491;
-		else if(ray()->draw_side == 3 && game()->map[(int)ray()->map_x][ray()->map_y] == '1')
-			game()->color = 0xb51991;
+		ray()->draw_end = ray()->line_height / 2 + HEIGHT / 2;
+		if (ray()->draw_end >= HEIGHT)
+			ray()->draw_end = HEIGHT - 1;
+		
+		if (ray()->side == 0)
+			ray()->wall_x = game()->pos_y + ray()->perp_wall_dist * ray()->dir_ray_y;
 		else
-			game()->color = 0xc40a23;
-		int y = 0;
-		while (y <= game()->win.width)
+			ray()->wall_x = game()->pos_x + ray()->perp_wall_dist * ray()->dir_ray_x;
+		ray()->wall_x -= floor(ray()->wall_x);
+		
+		ray()->tex_x = (int)(ray()->wall_x * (double)game()->img.width);
+		if (ray()->side == 0 && ray()->dir_ray_x > 0)
+			ray()->tex_x = game()->img.width - ray()->tex_x - 1;
+		if (ray()->side == 1 && ray()->dir_ray_y < 0)
+			ray()->tex_x = game()->img.width - ray()->tex_x - 1;
+
+		ray()->step = 1.0 * game()->img.width / ray()->line_height;
+
+		ray()->tex_pos = (ray()->draw_start - HEIGHT / 2 + ray()->line_height / 2) * ray()->step;
+		
+		y = 0;
+		while (y < HEIGHT)
 		{
 			if (y <= ray()->draw_start)
-				mlx_pixel_put(game()->mlx, game()->win.screen, x, y, 0x6770cf);
-			else if (y <= ray()->draw_end && y >= ray()->draw_start)
+				game()->color = 0x32a873;
+			else if (y > ray()->draw_start && y < ray()->draw_end)
 			{
-				if (game()->color == 1)
-				{
-					mlx_put_image_to_window(game()->mlx, game()->win.screen, game()->img, x, y);
-					y += 64;
-				}
-				else
-					mlx_pixel_put(game()->mlx, game()->win.screen, x, y, game()->color);
-				
+				ray()->tex_y = (int)ray()->tex_pos & (game()->img.height - 1);
+				ray()->tex_pos += ray()->step;
+				game()->color = game()->sprite[0][game()->img.height * ray()->tex_y  + ray()->tex_x];
 			}
-			else if (y > ray()->draw_end)
-				mlx_pixel_put(game()->mlx, game()->win.screen, x, y, 0x8f462e);
+			else
+				game()->color = 0x3d3329;
+			game()->buffer[y][x] = game()->color;
+			game()->buf = 1;
 			y++;
 		}
-		if (game()->color == 1)
-			x += 64;
-		else	
-			x++;
+		x++;
 	}
 }
+
+void	draw()
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < HEIGHT)
+	{
+		j = 0;
+		while (j < WIDTH)
+		{
+			game()->mlx_data[i * WIDTH + j] = game()->buffer[i][j];
+			j++;
+		}
+		i++;
+	}
+	mlx_put_image_to_window(game()->mlx, game()->win, game()->mlx_img, 0, 0);
+}
+		// if (ray()->draw_side == 0 && game()->map[(int)ray()->map_x][ray()->map_y] == '1')
+		// 	game()->color = 0xfc5e03;
+		// else if (ray()->draw_side == 1 && game()->map[(int)ray()->map_x][ray()->map_y] == '1')
+		// 	game()->color = 0x372491; 
+		// else if(ray()->draw_side == 2 && game()->map[(int)ray()->map_x][ray()->map_y] == '1')
+		// 	game()->color = 0x372491;
+		// else if(ray()->draw_side == 3 && game()->map[(int)ray()->map_x][ray()->map_y] == '1')
+		// 	game()->color = 0xb51991;
+		// else
+		// 	game()->color = 0xc40a23;
+		// int y = 0;
+		// while (y <= HEIGHT)
+		// {
+		// 	if (y <= ray()->draw_start)
+		// 		mlx_pixel_put(game()->mlx, game()->win, x, y, 0x6770cf);
+		// 	else if (y <= ray()->draw_end && y >= ray()->draw_start)
+		// 		mlx_pixel_put(game()->mlx, game()->win, x, y, game()->color);
+		// 	else if (y > ray()->draw_end)
+		// 		mlx_pixel_put(game()->mlx, game()->win, x, y, 0x8f462e);
+		// 	y++;
+		// }
+		// x++;

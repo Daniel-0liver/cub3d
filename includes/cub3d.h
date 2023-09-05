@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 01:52:49 by dateixei          #+#    #+#             */
-/*   Updated: 2023/08/21 10:38:48 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/08/30 02:54:53 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,20 @@
 # include <errno.h>
 # include <math.h>
 
+#define WIDTH 1080
+#define HEIGHT 720
 
-
-typedef struct s_win
+typedef struct s_img
 {
-	void		*screen;
+	void		*img;
+	char		*path;
+	int			*data;
 	int			width;
 	int			height;
-}			t_win;
+	int			size_l;
+	int			endian;
+	int			bits_per_pixel;
+}			t_img;
 
 typedef struct s_ray
 {
@@ -43,12 +49,17 @@ typedef struct s_ray
 	int			side;
 	int			map_x;
 	int			map_y;
+	int			tex_x;
+	int			tex_y;
 	int			step_x;
 	int			step_y;
 	int			draw_end;
-	int			draw_start;
 	int			draw_side;
+	int			draw_start;
 	int			line_height;
+	double		step;
+	double		wall_x;
+	double		tex_pos;
 	double		camera_x;
 	double		dir_ray_x;
 	double		dir_ray_y;
@@ -63,11 +74,19 @@ typedef struct s_ray
 typedef struct s_game
 {
 	void		*mlx;
-	void		*img;
-	char		*img_path;
-	t_win		win;
+	void		*mlx_img;
+	int			*mlx_data;
+	int			size_l;
+	int			endian;
 	int			color;
 	int			frame;
+	int			bits_per_pixel;
+	int			**sprite;
+	int			buffer[HEIGHT][WIDTH];
+	int			buf;
+	int			error;
+	void		*win;
+	t_img		img;
 	char		**map;
 	double		pos_x;
 	double		pos_y;
@@ -82,11 +101,13 @@ typedef struct s_game
 //cub3d.c
 t_game		*game(void);
 t_ray		*ray(void);
+int			start_buffer();
 
 //game_hook.c
 void		get_hooks(void);
 
 //game_render.c
+void		draw();
 void		win_render(void);
 
 #endif

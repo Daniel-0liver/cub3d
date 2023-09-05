@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:55:53 by dateixei          #+#    #+#             */
-/*   Updated: 2023/08/21 10:05:17 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/08/31 01:58:01 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,14 @@
 
 int	close_win()
 {
-	mlx_destroy_window(game()->mlx, game()->win.screen);
+	mlx_destroy_window(game()->mlx, game()->win);
 	return (0);
+}
+
+void	main_loop()
+{
+	win_render();
+	draw();
 }
 
 int	key_hook(int keycode)
@@ -50,12 +56,14 @@ int	key_hook(int keycode)
 		game()->pos_x -= game()->dir_x * game()->move_speed;
 		game()->pos_y -= game()->dir_y * game()->move_speed;
 	}
+	mlx_clear_window(game()->mlx, game()->win);
+	main_loop();
 	return (0);
 }
 
 void	get_hooks(void)
 {
-	mlx_hook(game()->win.screen, DestroyNotify, NoEventMask, (void *)&close_win, NULL);
-	mlx_hook(game()->win.screen, KeyPress, KeyPressMask, &key_hook, NULL);
-	mlx_loop_hook(game()->mlx,(void *) &win_render, NULL);
+	mlx_loop_hook(game()->mlx,(void *) &main_loop, NULL);
+	mlx_hook(game()->win, DestroyNotify, NoEventMask, (void *)&close_win, NULL);
+	mlx_hook(game()->win, KeyPress, KeyPressMask, &key_hook, NULL);
 }
