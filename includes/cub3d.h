@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 01:52:49 by dateixei          #+#    #+#             */
-/*   Updated: 2023/08/30 02:54:53 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/05 11:48:46 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,19 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <math.h>
+#include <X11/Xlib.h>
 
-#define WIDTH 1080
-#define HEIGHT 720
+#define WIDTH 640
+#define HEIGHT 480
+#define	NBR_SPRITES 4
 
 typedef struct s_img
 {
 	void		*img;
-	char		*path;
 	int			*data;
 	int			width;
-	int			height;
 	int			size_l;
+	int			height;
 	int			endian;
 	int			bits_per_pixel;
 }			t_img;
@@ -79,14 +80,14 @@ typedef struct s_game
 	int			size_l;
 	int			endian;
 	int			color;
-	int			frame;
+	int			nbr_spr;
 	int			bits_per_pixel;
 	int			**sprite;
 	int			buffer[HEIGHT][WIDTH];
 	int			buf;
 	int			error;
 	void		*win;
-	t_img		img;
+	t_img		img[NBR_SPRITES];
 	char		**map;
 	double		pos_x;
 	double		pos_y;

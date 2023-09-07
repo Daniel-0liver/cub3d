@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:55:33 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/05 10:34:47 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/05 11:43:26 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,14 +107,25 @@ void	win_render(void)
 		else
 			ray()->wall_x = game()->pos_x + ray()->perp_wall_dist * ray()->dir_ray_x;
 		ray()->wall_x -= floor(ray()->wall_x);
-		
-		ray()->tex_x = (int)(ray()->wall_x * (double)game()->img.width);
-		if (ray()->side == 0 && ray()->dir_ray_x > 0)
-			ray()->tex_x = game()->img.width - ray()->tex_x - 1;
-		if (ray()->side == 1 && ray()->dir_ray_y < 0)
-			ray()->tex_x = game()->img.width - ray()->tex_x - 1;
 
-		ray()->step = 1.0 * game()->img.width / ray()->line_height;
+		if (ray()->draw_side == 0 && game()->map[(int)ray()->map_x][ray()->map_y] == '1')
+			game()->nbr_spr = 0;
+		else if (ray()->draw_side == 1 && game()->map[(int)ray()->map_x][ray()->map_y] == '1')
+			game()->nbr_spr = 1; 
+		else if(ray()->draw_side == 2 && game()->map[(int)ray()->map_x][ray()->map_y] == '1')
+			game()->nbr_spr = 2;
+		else if(ray()->draw_side == 3 && game()->map[(int)ray()->map_x][ray()->map_y] == '1')
+			game()->nbr_spr = 3;
+		else
+			game()->nbr_spr = 0;
+
+		ray()->tex_x = (int)(ray()->wall_x * (double)game()->img[game()->nbr_spr].width);
+		if (ray()->side == 0 && ray()->dir_ray_x > 0)
+			ray()->tex_x = game()->img[game()->nbr_spr].width - ray()->tex_x - 1;
+		if (ray()->side == 1 && ray()->dir_ray_y < 0)
+			ray()->tex_x = game()->img[game()->nbr_spr].width - ray()->tex_x - 1;
+
+		ray()->step = 1.0 * game()->img[game()->nbr_spr].width / ray()->line_height;
 
 		ray()->tex_pos = (ray()->draw_start - HEIGHT / 2 + ray()->line_height / 2) * ray()->step;
 		
@@ -125,9 +136,9 @@ void	win_render(void)
 				game()->color = 0x32a873;
 			else if (y > ray()->draw_start && y < ray()->draw_end)
 			{
-				ray()->tex_y = (int)ray()->tex_pos & (game()->img.height - 1);
+				ray()->tex_y = (int)ray()->tex_pos & (game()->img[game()->nbr_spr].height - 1);
 				ray()->tex_pos += ray()->step;
-				game()->color = game()->sprite[0][game()->img.height * ray()->tex_y  + ray()->tex_x];
+				game()->color = game()->sprite[game()->nbr_spr][game()->img[game()->nbr_spr].height * ray()->tex_y  + ray()->tex_x];
 			}
 			else
 				game()->color = 0x3d3329;
