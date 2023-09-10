@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 02:24:18 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/05 11:58:05 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/10 17:26:07 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ int	start_sprite()
 	int	i;
 	int	j;
 
-	i = 0;
+	i = -1;
 	if (!(game()->sprite = (int **)malloc(1 * sizeof(int *))))
 		return (-1);
-	while (i++ < 4)
+	while (i++ < NBR_SPRITES)
 		if (!(game()->sprite[i] = (int *)malloc((game()->img[i].width * game()->img[i].height) * sizeof(int))))
 			return (-1);
 	i = 0;
-	while (i++ < 4)
+	while (i++ < NBR_SPRITES)
 	{
 		j = 0;
 		while (j < (game()->img[i].height * game()->img[i].width))
@@ -95,24 +95,25 @@ int	init_var()
 	int	i;
 
 	game()->mlx = mlx_init();
-	game()->dir_x = -1.0;
-	game()->dir_y = 0.0;
+	game()->dir_x = -1.0; 	//N = 0, S = 0, E = 1, W = -1
+	game()->dir_y = 0.0;  	//N = -1, S = 1, E = 0, W = 0
 	game()->pos_x = 6;
 	game()->pos_y = 6;
-	game()->plane_x = 0;
-	game()->plane_y = 0.66;
+	game()->plane_x = 0; 	//N = 0.66, S = -0.66, E = 0, W = 0
+	game()->plane_y = 0.66; //N = 0, S = 0, E = 0.66, W = -0.66
 	game()->move_speed = 0.05;
 	game()->rot_speed = 0.05;
 	game()->buf = 0;
-	game()->img[0].img = mlx_xpm_file_to_image(game()->mlx, "images/wall_34.xpm", &game()->img[0].width, &game()->img[0].height);
+	game()->img[0].img = mlx_xpm_file_to_image(game()->mlx, "images/blue_wall.xpm", &game()->img[0].width, &game()->img[0].height);
 	game()->img[1].img = mlx_xpm_file_to_image(game()->mlx, "images/wall_34.xpm", &game()->img[1].width, &game()->img[1].height);
-	game()->img[2].img = mlx_xpm_file_to_image(game()->mlx, "images/wall_34.xpm", &game()->img[2].width, &game()->img[2].height);
-	game()->img[3].img = mlx_xpm_file_to_image(game()->mlx, "images/wall_34.xpm", &game()->img[3].width, &game()->img[3].height);
+	game()->img[2].img = mlx_xpm_file_to_image(game()->mlx, "images/hd_wall.xpm", &game()->img[2].width, &game()->img[2].height);
+	game()->img[3].img = mlx_xpm_file_to_image(game()->mlx, "images/brick_wall.xpm", &game()->img[3].width, &game()->img[3].height);
+	game()->img[4].img = mlx_xpm_file_to_image(game()->mlx, "images/pillar.xpm", &game()->img[4].width, &game()->img[4].height);
 	start_buffer();
 	if (start_sprite() == -1)
 		return (-1);
 	i = -1;
-	while (++i < 4)
+	while (++i < NBR_SPRITES)
 		if (load_sprite(&game()->img[i], i) == -1)
 			return (-1);
 	return (0);

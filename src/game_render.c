@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:55:33 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/05 11:43:26 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/10 17:20:11 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	win_render(void)
 		else if(ray()->draw_side == 3 && game()->map[(int)ray()->map_x][ray()->map_y] == '1')
 			game()->nbr_spr = 3;
 		else
-			game()->nbr_spr = 0;
+			game()->nbr_spr = 4;
 
 		ray()->tex_x = (int)(ray()->wall_x * (double)game()->img[game()->nbr_spr].width);
 		if (ray()->side == 0 && ray()->dir_ray_x > 0)

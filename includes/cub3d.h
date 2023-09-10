@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 01:52:49 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/05 11:48:46 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/10 17:12:01 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 
 #define WIDTH 640
 #define HEIGHT 480
-#define	NBR_SPRITES 4
+#define	NBR_SPRITES 5
 
 typedef struct s_img
 {
