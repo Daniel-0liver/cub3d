@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_array.c                                    :+:      :+:    :+:   */
+/*   game_close.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/19 11:00:16 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/20 19:52:26 by dateixei         ###   ########.fr       */
+/*   Created: 2023/09/19 22:25:33 by dateixei          #+#    #+#             */
+/*   Updated: 2023/09/20 19:53:38 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-void	ft_free_array(void **array)
+void	game_close(int status, char *str)
 {
-	int	i;
-
-	i = 0;
-	while (array[i])
-		free(array[i++]);
-	free(array);
-	array = NULL;
+	free_elements(game()->element);
+	free_double_prt(game()->map);
+	ft_free_array((void **)game()->sprite);
+	printf("%s\n", str);
+	exit (status);
 }

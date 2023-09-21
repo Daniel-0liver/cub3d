@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 01:52:49 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/10 17:12:01 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/20 17:55:42 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct s_game
 	int			error;
 	void		*win;
 	t_img		img[NBR_SPRITES];
+	t_element	element;
 	char		**map;
 	double		pos_x;
 	double		pos_y;
@@ -108,7 +109,10 @@ int			start_buffer();
 void		get_hooks(void);
 
 //game_render.c
-void		draw();
+void		draw(void);
 void		win_render(void);
+
+//game_close
+void		game_close(int status, char *str);
 
 #endif

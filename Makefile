@@ -15,6 +15,7 @@ OBJ			=	$(patsubst src%, obj%, $(SRC:.c=.o))
 SRC			=	src/cub3d.c \
 				src/game_hook.c \
 				src/game_render.c \
+				src/game_exit/game_close.c \
 				src/map_validation/check_map.c \
 				src/map_validation/is_valid_map.c \
 				src/map_validation/get_elements.c \
@@ -41,7 +42,8 @@ $(MLX):
 			@echo " [ $(GREEN)OK$(RESET) ] | Minilibx ready!"
 
 obj:
-			@mkdir -p obj/map_validation
+			@mkdir -p obj/map_validation obj/game_init obj/game_move obj/game_render obj/raycasting \
+			obj/game_exit
 
 obj/%.o:	src/%.c ./includes/cub3d.h
 			@$(CC) $(FLAGS) -o $@ -c $<

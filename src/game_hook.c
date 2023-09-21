@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:55:53 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/10 23:27:24 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/20 21:27:30 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	close_win()
 {
+	mlx_destroy_image(game()->mlx, game()->mlx_img);
 	mlx_destroy_window(game()->mlx, game()->win);
 	return (0);
 }
@@ -53,10 +54,9 @@ int	key_hook(int keycode)
 	}
 	if (keycode == 115 || keycode == 65364) // S and Down
 	{
-		game()->pos_x -= game()->dir_x * game()->move_speed;
-		game()->pos_y -= game()->dir_y * game()->move_speed;
+		game()->pos_x += game()->dir_x * game()->move_speed;
+		game()->pos_y -= game()->dir_x * game()->move_speed;
 	}
-	mlx_clear_window(game()->mlx, game()->win);
 	main_loop();
 	return (0);
 }
