@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:55:33 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/20 20:05:03 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/22 17:07:25 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	win_render(void)
 				ray()->map_y += ray()->step_y;
 				ray()->side = 1;
 			}
-			if (game()->map[ray()->map_x][ray()->map_y] != '0')
+			if (game()->map[ray()->map_x][ray()->map_y] == '1')
 			{
 				ray()->hit = 1;
 				if (ray()->side == 0)
@@ -116,8 +116,6 @@ void	win_render(void)
 			game()->nbr_spr = 2;
 		else if(ray()->draw_side == 3 && game()->map[(int)ray()->map_x][ray()->map_y] == '1')
 			game()->nbr_spr = 3;
-		else
-			game()->nbr_spr = 4;
 
 		ray()->tex_x = (int)(ray()->wall_x * (double)game()->img[game()->nbr_spr].width);
 		if (ray()->side == 0 && ray()->dir_ray_x > 0)
@@ -138,7 +136,7 @@ void	win_render(void)
 			{
 				ray()->tex_y = (int)ray()->tex_pos & (game()->img[game()->nbr_spr].height - 1);
 				ray()->tex_pos += ray()->step;
-				game()->color = game()->sprite[game()->nbr_spr][game()->img[game()->nbr_spr].height * ray()->tex_y  + ray()->tex_x];
+				game()->color = game()->sprite[game()->nbr_spr][game()->img[game()->nbr_spr].height * ray()->tex_y + ray()->tex_x];
 			}
 			else
 				game()->color = 0x3d3329;

@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 01:52:49 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/20 17:55:42 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/22 16:10:27 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 
 #define WIDTH 640
 #define HEIGHT 480
-#define	NBR_SPRITES 5
+#define	NBR_SPRITES 4
 
 typedef struct s_img
 {
@@ -104,6 +104,17 @@ typedef struct s_game
 t_game		*game(void);
 t_ray		*ray(void);
 int			start_buffer();
+
+//game_init/init_var.c
+int			init_var(void);
+
+//game_init/start_posit.c
+int			start_posi(void);
+
+//game_init/init_img.c
+int			init_img(void);
+int			load_sprite(t_img *img, int nbr);
+int			start_sprite(void);
 
 //game_hook.c
 void		get_hooks(void);

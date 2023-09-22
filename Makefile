@@ -15,6 +15,9 @@ OBJ			=	$(patsubst src%, obj%, $(SRC:.c=.o))
 SRC			=	src/cub3d.c \
 				src/game_hook.c \
 				src/game_render.c \
+				src/game_init/init_var.c \
+				src/game_init/init_img.c \
+				src/game_init/start_posit.c \
 				src/game_exit/game_close.c \
 				src/map_validation/check_map.c \
 				src/map_validation/is_valid_map.c \
@@ -24,7 +27,7 @@ SRC			=	src/cub3d.c \
 				src/map_validation/get_next_line.c
 
 CC			=	cc
-FLAGS		=	-I${HEADER} -g -Wall -Wextra -Werror
+FLAGS		=	-I${HEADER} -g -Wall -Wextra -Werror #-fsanitize=leak
 
 all:		$(MLX) $(LFT) obj $(NAME) 
 

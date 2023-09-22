@@ -1,5 +1,5 @@
 
-       WE              ./images/colorstone.xpm
+       WE              images/blue_wall.xpm
 
 
 
@@ -11,18 +11,18 @@ F        74,41,41
 
 
 
-      NO                       ./images/wood.xpm
+      NO                       images/hd_wall.xpm
       
 
 
 
-SO ./images/greystone.xpm                 
+SO images/brick_wall.xpm                 
 
 
 
 C 231,236,249
 
-      EA          ./images/mossy.xpm              
+      EA          images/wall_34.xpm            
 
 
 
@@ -31,8 +31,8 @@ C 231,236,249
 1000000001
 1000010001
 1000000001
+10000W0001
 1000000001
 1000000001
 1000000001
-1S00000001
 1111111111

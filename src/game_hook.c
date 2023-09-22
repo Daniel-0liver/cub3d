@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:55:53 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/20 21:27:30 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/22 16:44:16 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	close_win()
 {
 	mlx_destroy_image(game()->mlx, game()->mlx_img);
 	mlx_destroy_window(game()->mlx, game()->win);
+	game_close(0, "Thank you for playing.");
 	return (0);
 }
 
@@ -29,7 +30,7 @@ int	key_hook(int keycode)
 {
 	if (keycode == 65307 || keycode == 113) //ESC and Q
 		close_win();
-	if (keycode == 100 || keycode == 65363) // D and ->
+	if (keycode == 65363) // ->
 	{
 		double olddir_x = game()->dir_x;
 		game()->dir_x = game()->dir_x * cos(-game()->rot_speed) - game()->dir_y * sin(-game()->rot_speed);
@@ -38,7 +39,7 @@ int	key_hook(int keycode)
 		game()->plane_x = game()->plane_x * cos(-game()->rot_speed) - game()->plane_y * sin(-game()->rot_speed);
 		game()->plane_y = oldplane_x * sin(-game()->rot_speed) + game()->plane_y * cos(-game()->rot_speed);
 	}
-	if (keycode == 97 || keycode == 65361) // A and <-
+	if (keycode == 65361) // <-
 	{
 		double olddir_x = game()->dir_x;
 		game()->dir_x = game()->dir_x * cos(game()->rot_speed) - game()->dir_y * sin(game()->rot_speed);
@@ -47,16 +48,27 @@ int	key_hook(int keycode)
 		game()->plane_x = game()->plane_x * cos(game()->rot_speed) - game()->plane_y * sin(game()->rot_speed);
 		game()->plane_y = oldplane_x * sin(game()->rot_speed) + game()->plane_y * cos(game()->rot_speed);
 	}
-	if (keycode == 119 || keycode == 65362) // W and UP
+	if (keycode == 119) // W and UP
 	{
 		game()->pos_x += game()->dir_x * game()->move_speed;
 		game()->pos_y += game()->dir_y * game()->move_speed;
 	}
-	if (keycode == 115 || keycode == 65364) // S and Down
+	if (keycode == 115) // S and Down
 	{
-		game()->pos_x += game()->dir_x * game()->move_speed;
+		game()->pos_x -= game()->dir_x * game()->move_speed;
+		game()->pos_y -= game()->dir_y * game()->move_speed;
+	}
+	if (keycode == 97) // A
+	{
+		game()->pos_x -= game()->dir_y * game()->move_speed;
 		game()->pos_y -= game()->dir_x * game()->move_speed;
 	}
+	if (keycode == 100) // D
+	{
+		game()->pos_x += game()->dir_y * game()->move_speed;
+		game()->pos_y += game()->dir_x * game()->move_speed;
+	}
+	mlx_destroy_image(game()->mlx, game()->mlx_img);
 	main_loop();
 	return (0);
 }
