@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:21:23 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/22 16:09:46 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/25 18:16:32 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ int	start_buffer()
 
 int	init_var()
 {
-	int	i;
-
 	game()->mlx = mlx_init();
 	start_posi();
 	init_img();
@@ -42,14 +40,5 @@ int	init_var()
 	game()->rot_speed = 0.05;
 	game()->buf = 0;
 	start_buffer();
-	if (start_sprite() == -1)
-		return (-1);
-	i = 0;
-	while (i < NBR_SPRITES)
-	{
-		if (load_sprite(&game()->img[i], i) == -1)
-			return (-1);
-		i++;
-	}
 	return (0);
 }

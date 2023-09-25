@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:55:53 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/22 16:44:16 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/25 13:03:35 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,17 @@ int	key_hook(int keycode)
 		game()->pos_x -= game()->dir_x * game()->move_speed;
 		game()->pos_y -= game()->dir_y * game()->move_speed;
 	}
-	if (keycode == 97) // A
+	else if (keycode == 97) // A
 	{
-		game()->pos_x -= game()->dir_y * game()->move_speed;
-		game()->pos_y -= game()->dir_x * game()->move_speed;
+		game()->pos_x -= game()->plane_x * game()->move_speed;
+		game()->pos_y -= game()->plane_y * game()->move_speed;
 	}
-	if (keycode == 100) // D
+	else if (keycode == 100) // D
 	{
-		game()->pos_x += game()->dir_y * game()->move_speed;
-		game()->pos_y += game()->dir_x * game()->move_speed;
+		game()->pos_x += game()->plane_x * game()->move_speed;
+		game()->pos_y += game()->plane_y * game()->move_speed;
 	}
-	mlx_destroy_image(game()->mlx, game()->mlx_img);
+	// mlx_destroy_image(game()->mlx, game()->mlx_img);
 	main_loop();
 	return (0);
 }

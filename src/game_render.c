@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:55:33 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/22 17:07:25 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/25 18:47:12 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,14 @@ void	init_ray_var()
 	ray()->delta_dist_x = fabs(1 / ray()->dir_ray_x);
 	ray()->delta_dist_y = fabs(1 / ray()->dir_ray_y);
 	ray()->hit = 0;
+}
+
+int	my_mlx_pixel_get(t_img *data, int x, int y)
+{
+	char	*dst;
+
+	dst = data->data + (y * data->size_l + x * (data->bits_per_pixel / 8));
+	return (*(unsigned int*)dst);
 }
 
 void	win_render(void)
@@ -118,25 +126,28 @@ void	win_render(void)
 			game()->nbr_spr = 3;
 
 		ray()->tex_x = (int)(ray()->wall_x * (double)game()->img[game()->nbr_spr].width);
-		if (ray()->side == 0 && ray()->dir_ray_x > 0)
-			ray()->tex_x = game()->img[game()->nbr_spr].width - ray()->tex_x - 1;
-		if (ray()->side == 1 && ray()->dir_ray_y < 0)
-			ray()->tex_x = game()->img[game()->nbr_spr].width - ray()->tex_x - 1;
+		// if (ray()->side == 0 && ray()->dir_ray_x > 0)
+		// 	ray()->tex_x = game()->img[game()->nbr_spr].width - ray()->tex_x - 1;
+		// if (ray()->side == 1 && ray()->dir_ray_y < 0)
+		// 	ray()->tex_x = game()->img[game()->nbr_spr].width - ray()->tex_x - 1;
 
 		ray()->step = 1.0 * game()->img[game()->nbr_spr].width / ray()->line_height;
 
 		ray()->tex_pos = (ray()->draw_start - HEIGHT / 2 + ray()->line_height / 2) * ray()->step;
 		
 		y = 0;
+		t_img *img = &game()->img[game()->nbr_spr];
 		while (y < HEIGHT)
 		{
 			if (y <= ray()->draw_start)
 				game()->color = 0x32a873;
 			else if (y > ray()->draw_start && y < ray()->draw_end)
 			{
-				ray()->tex_y = (int)ray()->tex_pos & (game()->img[game()->nbr_spr].height - 1);
+				ray()->tex_y = (int)ray()->tex_pos & (img->height - 1);
 				ray()->tex_pos += ray()->step;
-				game()->color = game()->sprite[game()->nbr_spr][game()->img[game()->nbr_spr].height * ray()->tex_y + ray()->tex_x];
+				game()->color = my_mlx_pixel_get(img, ray()->tex_x, ray()->tex_y);
+				
+				//img->data[img->height * ray()->tex_y + ray()->tex_x];
 			}
 			else
 				game()->color = 0x3d3329;
