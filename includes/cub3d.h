@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 01:52:49 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/25 18:15:57 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/27 17:09:14 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct s_game
 {
 	void		*mlx;
 	void		*mlx_img;
-	int			*mlx_data;
+	char		*mlx_data;
 	int			size_l;
 	int			endian;
 	int			color;
@@ -119,8 +119,9 @@ int			start_sprite(void);
 void		get_hooks(void);
 
 //game_render.c
-void		draw(void);
-void		win_render(void);
+void			draw(void);
+void			win_render(void);
+void			my_mlx_pixel_put(int x, int y, int color);
 
 //game_close
 void		game_close(int status, char *str);

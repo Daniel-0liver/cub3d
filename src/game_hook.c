@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:55:53 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/25 13:03:35 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/27 16:06:06 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	close_win()
 void	main_loop()
 {
 	win_render();
-	draw();
+	mlx_put_image_to_window(game()->mlx, game()->win, game()->mlx_img, 0, 0);
 }
 
 int	key_hook(int keycode)

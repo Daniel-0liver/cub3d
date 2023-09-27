@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 02:24:18 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/22 12:51:33 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/27 15:54:57 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
 		game_close(-1, "Error while initializing variables.");
 	game()->win = mlx_new_window(game()->mlx, WIDTH, HEIGHT, "Cub3D");
 	game()->mlx_img = mlx_new_image(game()->mlx, WIDTH, HEIGHT);
-	game()->mlx_data = (int *)mlx_get_data_addr(game()->mlx_img, &game()->bits_per_pixel, &game()->size_l, &game()->endian);
+	game()->mlx_data = mlx_get_data_addr(game()->mlx_img, &game()->bits_per_pixel, &game()->size_l, &game()->endian);
 	get_hooks();
 	mlx_loop(game()->mlx);
 	return (0);

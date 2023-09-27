@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:55:33 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/25 18:47:12 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/27 18:01:35 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@ int	my_mlx_pixel_get(t_img *data, int x, int y)
 
 	dst = data->data + (y * data->size_l + x * (data->bits_per_pixel / 8));
 	return (*(unsigned int*)dst);
+}
+
+void	my_mlx_pixel_put(int x, int y, int color)
+{
+	char	*dst;
+
+	dst = game()->mlx_data + (y * game()->size_l + x * (game()->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
 }
 
 void	win_render(void)
@@ -125,77 +133,29 @@ void	win_render(void)
 		else if(ray()->draw_side == 3 && game()->map[(int)ray()->map_x][ray()->map_y] == '1')
 			game()->nbr_spr = 3;
 
-		ray()->tex_x = (int)(ray()->wall_x * (double)game()->img[game()->nbr_spr].width);
-		// if (ray()->side == 0 && ray()->dir_ray_x > 0)
-		// 	ray()->tex_x = game()->img[game()->nbr_spr].width - ray()->tex_x - 1;
-		// if (ray()->side == 1 && ray()->dir_ray_y < 0)
-		// 	ray()->tex_x = game()->img[game()->nbr_spr].width - ray()->tex_x - 1;
+		ray()->tex_x = (int)(ray()->wall_x * game()->img[game()->nbr_spr].height);
 
 		ray()->step = 1.0 * game()->img[game()->nbr_spr].width / ray()->line_height;
 
 		ray()->tex_pos = (ray()->draw_start - HEIGHT / 2 + ray()->line_height / 2) * ray()->step;
 		
 		y = 0;
-		t_img *img = &game()->img[game()->nbr_spr];
 		while (y < HEIGHT)
 		{
 			if (y <= ray()->draw_start)
 				game()->color = 0x32a873;
 			else if (y > ray()->draw_start && y < ray()->draw_end)
 			{
-				ray()->tex_y = (int)ray()->tex_pos & (img->height - 1);
+				ray()->tex_y = (int)ray()->tex_pos & (game()->img[game()->nbr_spr].height - 1);
 				ray()->tex_pos += ray()->step;
-				game()->color = my_mlx_pixel_get(img, ray()->tex_x, ray()->tex_y);
-				
-				//img->data[img->height * ray()->tex_y + ray()->tex_x];
+				game()->color = my_mlx_pixel_get(&game()->img[game()->nbr_spr], ray()->tex_x, ray()->tex_y);
 			}
 			else
 				game()->color = 0x3d3329;
-			game()->buffer[y][x] = game()->color;
+			my_mlx_pixel_put(x, y, game()->color);
 			game()->buf = 1;
 			y++;
 		}
 		x++;
 	}
 }
-
-void	draw()
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < HEIGHT)
-	{
-		j = 0;
-		while (j < WIDTH)
-		{
-			game()->mlx_data[i * WIDTH + j] = game()->buffer[i][j];
-			j++;
-		}
-		i++;
-	}
-	mlx_put_image_to_window(game()->mlx, game()->win, game()->mlx_img, 0, 0);
-}
-		// if (ray()->draw_side == 0 && game()->map[(int)ray()->map_x][ray()->map_y] == '1')
-		// 	game()->color = 0xfc5e03;
-		// else if (ray()->draw_side == 1 && game()->map[(int)ray()->map_x][ray()->map_y] == '1')
-		// 	game()->color = 0x372491; 
-		// else if(ray()->draw_side == 2 && game()->map[(int)ray()->map_x][ray()->map_y] == '1')
-		// 	game()->color = 0x372491;
-		// else if(ray()->draw_side == 3 && game()->map[(int)ray()->map_x][ray()->map_y] == '1')
-		// 	game()->color = 0xb51991;
-		// else
-		// 	game()->color = 0xc40a23;
-		// int y = 0;
-		// while (y <= HEIGHT)
-		// {
-		// 	if (y <= ray()->draw_start)
-		// 		mlx_pixel_put(game()->mlx, game()->win, x, y, 0x6770cf);
-		// 	else if (y <= ray()->draw_end && y >= ray()->draw_start)
-		// 		mlx_pixel_put(game()->mlx, game()->win, x, y, game()->color);
-		// 	else if (y > ray()->draw_end)
-		// 		mlx_pixel_put(game()->mlx, game()->win, x, y, 0x8f462e);
-		// 	y++;
-		// }
-		// x++;
