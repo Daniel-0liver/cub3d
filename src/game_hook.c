@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:55:53 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/27 16:06:06 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/28 19:45:14 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int	close_win()
 {
-	mlx_destroy_image(game()->mlx, game()->mlx_img);
-	mlx_destroy_window(game()->mlx, game()->win);
 	game_close(0, "Thank you for playing.");
 	return (0);
 }
@@ -68,7 +66,6 @@ int	key_hook(int keycode)
 		game()->pos_x += game()->plane_x * game()->move_speed;
 		game()->pos_y += game()->plane_y * game()->move_speed;
 	}
-	// mlx_destroy_image(game()->mlx, game()->mlx_img);
 	main_loop();
 	return (0);
 }

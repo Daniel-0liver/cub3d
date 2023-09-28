@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 01:52:49 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/27 17:09:14 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/28 17:39:49 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # include <math.h>
 #include <X11/Xlib.h>
 
-#define WIDTH 640
-#define HEIGHT 480
+#define WIDTH 1080
+#define HEIGHT 720
 #define	NBR_SPRITES 4
 
 typedef struct s_img
@@ -71,7 +71,6 @@ typedef struct s_ray
 	double		perp_wall_dist;
 }			t_ray;
 
-
 typedef struct s_game
 {
 	void		*mlx;
@@ -82,8 +81,6 @@ typedef struct s_game
 	int			color;
 	int			nbr_spr;
 	int			bits_per_pixel;
-	int			buffer[HEIGHT][WIDTH];
-	int			buf;
 	int			error;
 	void		*win;
 	t_img		img[NBR_SPRITES];
@@ -102,7 +99,6 @@ typedef struct s_game
 //cub3d.c
 t_game		*game(void);
 t_ray		*ray(void);
-int			start_buffer();
 
 //game_init/init_var.c
 int			init_var(void);
@@ -119,9 +115,9 @@ int			start_sprite(void);
 void		get_hooks(void);
 
 //game_render.c
-void			draw(void);
-void			win_render(void);
-void			my_mlx_pixel_put(int x, int y, int color);
+void		draw(void);
+void		win_render(void);
+void		my_mlx_pixel_put(int x, int y, int color);
 
 //game_close
 void		game_close(int status, char *str);

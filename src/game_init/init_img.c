@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:05:50 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/25 18:48:37 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/28 19:51:41 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,12 @@ int	init_img(void)
 
 int	load_sprite(char *file, int nbr)
 {
+	game()->img[nbr].img = NULL;
 	game()->img[nbr].img = mlx_xpm_file_to_image(game()->mlx,
 		file, &game()->img[nbr].width, &game()->img[nbr].height);
+	printf("W: %d       H: %i\n", game()->img[nbr].width, game()->img[nbr].height);
+	if (game()->img[nbr].img == NULL)
+		game_close(-1, "Error while opening IMG");
 	game()->img[nbr].data = mlx_get_data_addr(game()->img[nbr].img , \
 		&game()->img[nbr].bits_per_pixel,
 		&game()->img[nbr].size_l, &game()->img[nbr].endian);
