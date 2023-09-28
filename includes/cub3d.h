@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 01:52:49 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/28 17:39:49 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/28 20:50:06 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ typedef struct s_ray
 	int			side;
 	int			map_x;
 	int			map_y;
-	int			tex_x;
-	int			tex_y;
+	double		tex_x;
+	double		tex_y;
 	int			step_x;
 	int			step_y;
 	int			draw_end;
@@ -60,7 +60,6 @@ typedef struct s_ray
 	int			line_height;
 	double		step;
 	double		wall_x;
-	double		tex_pos;
 	double		camera_x;
 	double		dir_ray_x;
 	double		dir_ray_y;

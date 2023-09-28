@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:55:33 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/28 20:04:19 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/28 20:47:49 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,10 @@ void	init_ray_var(int x)
 	ray()->hit = 0;
 }
 
-int	my_mlx_pixel_get(t_img *data, int x, int y)
+int	my_mlx_pixel_get(t_img *img, int x, int y)
 {
-	char	*dst;
-
-	dst = data->data + (y * data->size_l + x * (data->bits_per_pixel / 8));
-	return (*(unsigned int *)dst);
+	return (*(unsigned int *)(img->data + (y * img->size_l + \
+x * (img->bits_per_pixel / 8))));
 }
 
 void	my_mlx_pixel_put(int x, int y, int color)
@@ -149,11 +147,8 @@ void	define_wall_side(void)
 void	get_color(int x, int y)
 {
 	ray()->tex_x = (int)(ray()->wall_x * game()->img[game()->nbr_spr].height);
-	if ((ray()->side == 0 && ray()->dir_ray_x > 0) \
-		|| (ray()->side == 1 && ray()->dir_ray_y < 0))
-		ray()->tex_x = game()->img[game()->nbr_spr].width - ray()->tex_x - 1;
 	ray()->step = 1.0 * game()->img[game()->nbr_spr].width / ray()->line_height;
-	ray()->tex_pos = (ray()->draw_start - HEIGHT / 2 \
+	ray()->tex_y = (ray()->draw_start - HEIGHT / 2 \
 		+ ray()->line_height / 2) * ray()->step;
 	while (y < HEIGHT)
 	{
@@ -161,11 +156,8 @@ void	get_color(int x, int y)
 			game()->color = 0x32a873;
 		else if (y > ray()->draw_start && y <= ray()->draw_end)
 		{
-			ray()->tex_y = (int)ray()->tex_pos \
-				& (game()->img[game()->nbr_spr].height - 1);
-			ray()->tex_pos += ray()->step;
-			(game()->color) = my_mlx_pixel_get(&game()->img[game()->nbr_spr], \
-				ray()->tex_x, ray()->tex_y);
+			ray()->tex_y += ray()->step;
+			game()->color = my_mlx_pixel_get(&game()->img[game()->nbr_spr], ray()->tex_x, ray()->tex_y);
 		}
 		else
 			game()->color = 0x3d3329;
