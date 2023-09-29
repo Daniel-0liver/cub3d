@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:55:33 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/28 20:47:49 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/29 21:52:38 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,15 +152,15 @@ void	get_color(int x, int y)
 		+ ray()->line_height / 2) * ray()->step;
 	while (y < HEIGHT)
 	{
-		if (y <= ray()->draw_start)
-			game()->color = 0x32a873;
-		else if (y > ray()->draw_start && y <= ray()->draw_end)
+		if (y < ray()->draw_start)
+			game()->color = game()->c_color;
+		else if (y >= ray()->draw_start && y <= ray()->draw_end)
 		{
 			ray()->tex_y += ray()->step;
 			game()->color = my_mlx_pixel_get(&game()->img[game()->nbr_spr], ray()->tex_x, ray()->tex_y);
 		}
 		else
-			game()->color = 0x3d3329;
+			game()->color = game()->f_color;
 		my_mlx_pixel_put(x, y, game()->color);
 		y++;
 	}

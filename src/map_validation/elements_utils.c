@@ -6,11 +6,26 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:29:21 by gateixei          #+#    #+#             */
-/*   Updated: 2023/08/12 14:47:38 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/29 22:41:17 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map_validation.h"
+
+int	element_len(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str && str[i] != '\0' && str[i] != '\n')
+		i++;
+	i--;
+	while (str[i] != '\0' && (str[i] == ' ' \
+	|| str[i] == '\t' || str[i] == '\v' \
+	|| str[i] == '\r' || str[i] == '\f'))
+		i--;
+	return (i + 1);
+}
 
 int	map_strlen(char *str)
 {
@@ -27,7 +42,9 @@ int	next_element(char *str)
 	int	i;
 
 	i = 0;
-	while (str && str[i] != '\0' && (str[i] == '\n' || str[i] == ' '))
+	while (str && str[i] != '\0' && (str[i] == '\n' \
+	|| str[i] == ' ' || str[i] == '\t' || str[i] == '\v' \
+	|| str[i] == '\r' || str[i] == '\f'))
 		i++;
 	return (i);
 }

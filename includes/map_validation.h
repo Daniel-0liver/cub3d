@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:24:16 by gateixei          #+#    #+#             */
-/*   Updated: 2023/08/12 14:48:39 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/29 21:42:25 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ t_element	get_elements(char *full_file, t_element element);
 
 // elementos_utils ----------
 
+int			element_len(char *str);
 int			map_strlen(char *str);
 int			next_element(char *str);
 int			check_type_id(char *str);

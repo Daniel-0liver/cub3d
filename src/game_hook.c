@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 11:55:53 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/28 19:45:14 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/29 17:03:12 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,23 +48,41 @@ int	key_hook(int keycode)
 	}
 	if (keycode == 119) // W and UP
 	{
-		game()->pos_x += game()->dir_x * game()->move_speed;
-		game()->pos_y += game()->dir_y * game()->move_speed;
+		if (game()->map[(int)(game()->pos_x + (game()->dir_x \
+			* game()->move_speed))][(int)(game()->pos_y)] != '1')
+			game()->pos_x += game()->dir_x * game()->move_speed;
+		if (game()->map[(int)(game()->pos_x)][(int)(game()->pos_y \
+			+ (game()->dir_y * game()->move_speed))] != '1')
+			game()->pos_y += game()->dir_y * game()->move_speed;
 	}
 	if (keycode == 115) // S and Down
 	{
-		game()->pos_x -= game()->dir_x * game()->move_speed;
-		game()->pos_y -= game()->dir_y * game()->move_speed;
+		if (game()->map[(int)(game()->pos_x - (game()->dir_x \
+			* game()->move_speed))]\
+			[(int)(game()->pos_y)] != '1')
+			game()->pos_x -= game()->dir_x * game()->move_speed;
+		if (game()->map[(int)(game()->pos_x)]\
+			[(int)(game()->pos_y \
+			- (game()->dir_y * game()->move_speed))] != '1')
+			game()->pos_y -= game()->dir_y * game()->move_speed;
 	}
 	else if (keycode == 97) // A
 	{
-		game()->pos_x -= game()->plane_x * game()->move_speed;
-		game()->pos_y -= game()->plane_y * game()->move_speed;
+		if (game()->map[(int)(game()->pos_x - (game()->plane_x \
+			* game()->move_speed))][(int)(game()->pos_y)] != '1')
+			game()->pos_x -= game()->plane_x * game()->move_speed;
+		if (game()->map[(int)(game()->pos_x)][(int)(game()->pos_y \
+			- (game()->plane_y * game()->move_speed))] != '1')
+			game()->pos_y -= game()->plane_y * game()->move_speed;
 	}
 	else if (keycode == 100) // D
 	{
-		game()->pos_x += game()->plane_x * game()->move_speed;
-		game()->pos_y += game()->plane_y * game()->move_speed;
+		if (game()->map[(int)(game()->pos_x + (game()->plane_x \
+			* game()->move_speed))][(int)game()->pos_y] != '1')
+			game()->pos_x += game()->plane_x * game()->move_speed;
+		if (game()->map[(int)(game()->pos_x)][(int)(game()->pos_y \
+			+ (game()->plane_y * game()->move_speed))] != '1')
+			game()->pos_y += game()->plane_y * game()->move_speed;
 	}
 	main_loop();
 	return (0);

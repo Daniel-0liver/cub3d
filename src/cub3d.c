@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 02:24:18 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/28 17:43:25 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/29 22:17:24 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,12 @@ t_ray	*ray(void)
 int main(int argc, char *argv[])
 {
 	game()->element = is_valid_map(argc, argv);
+	printf("%s$", game()->element.so);
 	game()->map = updted_split(ft_split(game()->element.map, '\n'));
 	for (int i = 0; game()->map[i]; i++)
 		printf("%s\n", game()->map[i]);
 	if (init_var() == -1)
 		game_close(-1, "Error while initializing variables.");
-	game()->win = mlx_new_window(game()->mlx, WIDTH, HEIGHT, "Cub3D");
-	game()->mlx_img = mlx_new_image(game()->mlx, WIDTH, HEIGHT);
-	game()->mlx_data = mlx_get_data_addr(game()->mlx_img, &game()->bits_per_pixel, &game()->size_l, &game()->endian);
 	get_hooks();
 	mlx_loop(game()->mlx);
 	return (0);

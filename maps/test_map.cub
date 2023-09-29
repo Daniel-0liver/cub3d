@@ -1,10 +1,14 @@
-WE images/blue_wall.xpm
-NO images/blue_wall.xpm
-SO images/hd_wall2.xpm                 
-EA images/hd_wall2.xpm            
+WE ./images/blue_wall.xpm
 
-F 74,41,41
-C 231,236,249
+NO ./images/blue_wall.xpm
+
+SO ./images/hd_wall2.xpm   
+
+EA ./images/hd_wall2.xpm                  
+
+
+C 0,0,0
+F 240,240,241
 
 1111111111
 1000000001

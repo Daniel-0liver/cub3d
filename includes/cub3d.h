@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 01:52:49 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/28 20:50:06 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/29 19:38:12 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ typedef struct s_game
 	int			nbr_spr;
 	int			bits_per_pixel;
 	int			error;
+	int			f_color;
+	int			c_color;
 	void		*win;
 	t_img		img[NBR_SPRITES];
 	t_element	element;

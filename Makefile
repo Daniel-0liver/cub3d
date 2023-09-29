@@ -27,14 +27,14 @@ SRC			=	src/cub3d.c \
 				src/map_validation/get_next_line.c
 
 CC			=	cc
-FLAGS		=	-I${HEADER} -g -Wall -Wextra -Werror -fsanitize=leak
+FLAGS		=	-I${HEADER} -g -Wall -Wextra -Werror #-fsanitize=leak
 
-all:		$(MLX) $(LFT) obj $(NAME) 
+all:		$(MLX) $(LFT) obj $(NAME)
 
 $(NAME):	$(OBJ)
 			@$(CC) -o $@ $^ $(FLAGS) -L ./libft -lft -L ./mlx -lmlx -lXext -lX11 -lm
 
-$(LFT):		
+$(LFT):
 			@@echo " [ .. ] | Compiling libft.."
 			@$(MAKE) -C libft -f Makefile all --no-print-directory
 			@@echo " [ $(GREEN)OK$(RESET) ] | Libft ready!"
