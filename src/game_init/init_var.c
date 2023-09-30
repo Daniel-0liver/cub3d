@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:21:23 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/29 22:01:32 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/30 14:02:58 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,11 @@ int	ft_atoi_rgb(const char *nptr)
 		result = result * 10 + (nptr[i] - '0');
 		i++;
 	}
-	while (nptr[i] && (nptr[i] == ' ' || nptr[i] == '\t' || nptr[i] == '\v' || nptr[i] == 'r'))
+	while (nptr[i] && (nptr[i] == ' ' || nptr[i] == '\t' \
+		|| nptr[i] == '\v' || nptr[i] == 'r'))
 		i++;
 	if (nptr[i] != 0 || result > 255 || result < 0)
-		return(-1);
+		return (-1);
 	return (result);
 }
 
@@ -43,7 +44,7 @@ int	get_rgb_color(char	*file)
 	int		g;
 	int		b;
 	int		i;
-	char **rgb;
+	char	**rgb;
 
 	rgb = ft_split(file, ',');
 	i = 0;
@@ -58,14 +59,15 @@ int	get_rgb_color(char	*file)
 	return ((r << 16) | (g << 8) | b);
 }
 
-int	init_var()
+int	init_var(void)
 {
-	game()->mlx = mlx_init();
-	game()->mlx_img = mlx_new_image(game()->mlx, WIDTH, HEIGHT);
-	game()->mlx_data = mlx_get_data_addr(game()->mlx_img, &game()->bits_per_pixel, &game()->size_l, &game()->endian);
+	(game()->mlx) = mlx_init();
+	(game()->mlx_img) = mlx_new_image(game()->mlx, WIDTH, HEIGHT);
+	(game()->mlx_data) = mlx_get_data_addr(game()->mlx_img, \
+		&game()->bits_per_pixel, &game()->size_l, &game()->endian);
 	start_posi();
 	init_img();
-	game()->win = mlx_new_window(game()->mlx, WIDTH, HEIGHT, "Cub3D");
+	(game()->win) = mlx_new_window(game()->mlx, WIDTH, HEIGHT, "Cub3D");
 	game()->c_color = get_rgb_color(game()->element.c);
 	game()->f_color = get_rgb_color(game()->element.f);
 	game()->move_speed = 0.05;

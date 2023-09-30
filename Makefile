@@ -13,18 +13,22 @@ HEADER		=	./includes -I ./libft/includes -I ./mlx
 OBJ			=	$(patsubst src%, obj%, $(SRC:.c=.o))
 
 SRC			=	src/cub3d.c \
-				src/game_hook.c \
-				src/game_render.c \
 				src/game_init/init_var.c \
 				src/game_init/init_img.c \
+				src/game_init/init_struct.c \
 				src/game_init/start_posit.c \
-				src/game_exit/game_close.c \
+				src/game_move/game_hook.c \
+				src/game_move/player_move.c \
+				src/game_move/camera_move.c \
+				src/game_render/game_render.c \
+				src/raycasting/raycasting_calc.c \
 				src/map_validation/check_map.c \
 				src/map_validation/is_valid_map.c \
 				src/map_validation/get_elements.c \
 				src/map_validation/exit_elements.c \
 				src/map_validation/elements_utils.c \
-				src/map_validation/get_next_line.c
+				src/map_validation/get_next_line.c \
+				src/game_exit/game_close.c
 
 CC			=	cc
 FLAGS		=	-I${HEADER} -g -Wall -Wextra -Werror #-fsanitize=leak

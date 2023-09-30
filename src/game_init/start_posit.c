@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 12:52:48 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/27 15:53:52 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/30 04:42:58 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	start_w_e(void)
 	return (0);
 }
 
-int start_n_s(void)
+int	start_n_s(void)
 {
 	if (game()->map[(int)game()->pos_x][(int)game()->pos_y] == 'N')
 	{

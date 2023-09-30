@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 01:52:49 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/29 19:38:12 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/30 13:59:19 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <math.h>
-#include <X11/Xlib.h>
+# include <X11/Xlib.h>
 
-#define WIDTH 1080
-#define HEIGHT 720
-#define	NBR_SPRITES 4
+# define WIDTH 1080
+# define HEIGHT 720
+# define NBR_SPRITES 4
 
 typedef struct s_img
 {
@@ -98,6 +98,7 @@ typedef struct s_game
 }			t_game;
 
 //cub3d.c
+t_element	set_element(void);
 t_game		*game(void);
 t_ray		*ray(void);
 
@@ -109,18 +110,35 @@ int			start_posi(void);
 
 //game_init/init_img.c
 int			init_img(void);
-int			load_sprite(char *file, int nbr);
 int			start_sprite(void);
+int			load_sprite(char *file, int nbr);
 
 //game_hook.c
 void		get_hooks(void);
+
+//player_move.c
+void		move_foward(void);
+void		move_backward(void);
+void		move_right(void);
+void		move_left(void);
+
+//camera_move.c
+void		camera_move_right(void);
+void		camera_move_left(void);
 
 //game_render.c
 void		draw(void);
 void		win_render(void);
 void		my_mlx_pixel_put(int x, int y, int color);
 
-//game_close
-void		game_close(int status, char *str);
+//raycasting.c
+void		init_ray_var(int x);
+void		get_wall_side(void);
+void		calc_step_side(void);
+void		calc_hit_wall(void);
+void		calc_perp_draw(void);
 
+//game_close
+int			close_win(void);
+void		game_close(int status, char *str);
 #endif

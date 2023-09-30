@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 22:25:33 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/29 16:30:00 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/30 04:45:53 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,10 @@ void	game_close(int status, char *str)
 	else
 		printf("%s\n", str);
 	exit (status);
+}
+
+int	close_win(void)
+{
+	game_close(0, "Thank you for playing.");
+	return (0);
 }

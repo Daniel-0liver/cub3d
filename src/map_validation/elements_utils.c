@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:29:21 by gateixei          #+#    #+#             */
-/*   Updated: 2023/09/29 22:41:17 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/30 04:40:07 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,20 +59,6 @@ int	check_type_id(char *str)
 	|| !ft_strncmp(str, "C ", 2))
 		return (1);
 	return (0);
-}
-
-t_element	set_element(void)
-{
-	t_element	elements;
-
-	elements.no = NULL;
-	elements.so = NULL;
-	elements.ea = NULL;
-	elements.we = NULL;
-	elements.c = NULL;
-	elements.f = NULL;
-	elements.map = NULL;
-	return (elements);
 }
 
 int	check_null_elements(t_element elements)

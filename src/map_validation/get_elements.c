@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 11:25:15 by gateixei          #+#    #+#             */
-/*   Updated: 2023/09/29 22:34:00 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/09/30 05:10:27 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ char	*dup_elements(char *str)
 	i = map_strlen(str);
 	i += next_element(&str[i]);
 	size = element_len(&str[i]);
-	printf("%d$\n", size);
 	element = malloc(sizeof(char) * (size + 1));
 	while (size-- > 0)
 		element[j++] = str[i++];

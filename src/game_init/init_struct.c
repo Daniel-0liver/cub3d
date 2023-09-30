@@ -1,24 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/07 02:24:18 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/30 14:00:58 by dateixei         ###   ########.fr       */
+/*   Created: 2023/09/30 04:40:48 by dateixei          #+#    #+#             */
+/*   Updated: 2023/09/30 04:42:09 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char *argv[])
+t_element	set_element(void)
 {
-	(game()->element) = is_valid_map(argc, argv);
-	(game()->map) = updted_split(ft_split(game()->element.map, '\n'));
-	if (init_var() == -1)
-		game_close(-1, "Error while initializing variables.");
-	get_hooks();
-	mlx_loop(game()->mlx);
-	return (0);
+	t_element	elements;
+
+	elements.no = NULL;
+	elements.so = NULL;
+	elements.ea = NULL;
+	elements.we = NULL;
+	elements.c = NULL;
+	elements.f = NULL;
+	elements.map = NULL;
+	return (elements);
+}
+
+t_game	*game(void)
+{
+	static t_game	game;
+
+	return (&game);
+}
+
+t_ray	*ray(void)
+{
+	static t_ray	ray;
+
+	return (&ray);
 }
