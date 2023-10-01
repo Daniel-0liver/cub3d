@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 04:59:50 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/30 05:04:17 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/10/01 15:01:24 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	camera_move_right(void)
 		- game()->plane_y * sin(-game()->rot_speed);
 	game()->plane_y = oldplane_x * sin(-game()->rot_speed) \
 		+ game()->plane_y * cos(-game()->rot_speed);
+	game()->rot_speed = 0.05;
 }
 
 void	camera_move_left(void)
@@ -44,4 +45,5 @@ void	camera_move_left(void)
 		- game()->plane_y * sin(game()->rot_speed);
 	game()->plane_y = oldplane_x * sin(game()->rot_speed) \
 		+ game()->plane_y * cos(game()->rot_speed);
+	game()->rot_speed = 0.05;
 }

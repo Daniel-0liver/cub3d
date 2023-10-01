@@ -31,7 +31,7 @@ SRC			=	src/cub3d.c \
 				src/game_exit/game_close.c
 
 CC			=	cc
-FLAGS		=	-I${HEADER} -g -Wall -Wextra -Werror -fsanitize=leak
+FLAGS		=	-I${HEADER} -g -Wall -Wextra -Werror #-fsanitize=leak
 
 all:		$(MLX) $(LFT) obj $(NAME)
 

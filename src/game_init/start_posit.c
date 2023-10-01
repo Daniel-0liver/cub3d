@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 12:52:48 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/30 04:42:58 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/10/01 16:20:55 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	check_pos(char **str)
 			if (str[i][j] == 'N' || str[i][j] == 'S' \
 				|| str[i][j] == 'E' || str[i][j] == 'W')
 			{
-				game()->pos_x = i;
-				game()->pos_y = j;
+				game()->pos_x = (i + 0.5);
+				game()->pos_y = (j + 0.5);
 				return (0);
 			}
 			j++;

@@ -1,7 +1,7 @@
-NO ./images/wood.xpm
-SO ./images/greystone.xpm
-WE ./images/colorstone.xpm
-EA ./images/mossy.xpm
+NO ./images/one_piece1.xpm
+SO ./images/one_piece3.xpm
+WE ./images/onepieceboat.xpm
+EA ./images/luffy.xpm
 
 C 231,236,249
 F 74,41,41

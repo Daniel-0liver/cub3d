@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 11:21:23 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/30 14:02:58 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/10/01 17:03:24 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,28 +50,36 @@ int	get_rgb_color(char	*file)
 	i = 0;
 	while (rgb[i])
 		i++;
+	if (i != 3)
+	{
+		free_double_prt(rgb);
+		game_close(-1, "Error while verify RGB color");
+	}
 	r = ft_atoi_rgb(rgb[0]);
 	g = ft_atoi_rgb(rgb[1]);
 	b = ft_atoi_rgb(rgb[2]);
 	free_double_prt(rgb);
-	if (i != 3 || file[0] == ',' || r == -1 || g == -1 || b == -1)
-		game_close(-1, "Error while picking color");
+	if (file[0] == ',' || r == -1 || g == -1 || b == -1)
+		game_close(-2, "Error while picking color");
 	return ((r << 16) | (g << 8) | b);
 }
 
+	// mlx_mouse_hide(game()->mlx, game()->win);
 int	init_var(void)
 {
 	(game()->mlx) = mlx_init();
+	game()->c_color = get_rgb_color(game()->element.c);
+	game()->f_color = get_rgb_color(game()->element.f);
 	(game()->mlx_img) = mlx_new_image(game()->mlx, WIDTH, HEIGHT);
 	(game()->mlx_data) = mlx_get_data_addr(game()->mlx_img, \
 		&game()->bits_per_pixel, &game()->size_l, &game()->endian);
 	start_posi();
 	init_img();
 	(game()->win) = mlx_new_window(game()->mlx, WIDTH, HEIGHT, "Cub3D");
-	game()->c_color = get_rgb_color(game()->element.c);
-	game()->f_color = get_rgb_color(game()->element.f);
 	game()->move_speed = 0.05;
 	game()->rot_speed = 0.05;
 	game()->color = 0;
+	game()->flag = 0;
+	mlx_mouse_get_pos(game()->mlx, game()->win, &game()->x, &game()->y);
 	return (0);
 }

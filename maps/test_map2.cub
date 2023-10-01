@@ -1,14 +1,17 @@
 
 
-NO ./images/one_piece1.xpm
-SO ./images/one_piece2.xpm
-WE 	./images/one_piece3.xpm
-EA ./images/one_piece4.xpm
+WE ./images/mario_wall.xpm
+
+NO ./images/blue_wall.xpm
+
+SO ./images/stone_wall.xpm   
+
+EA ./images/hd_wall2.xpm  
 C 0,0,0
 
 
 
-F          0     , 0    ,   0
+F          100     , 100    ,   100
 
 
 

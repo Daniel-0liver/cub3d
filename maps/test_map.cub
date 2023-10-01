@@ -1,21 +1,21 @@
-WE ./images/blue_wall.xpm
+WE ./images/mario_wall.xpm
 
 NO ./images/blue_wall.xpm
 
-SO ./images/hd_wall2.xpm   
+SO ./images/stone_wall.xpm   
 
 EA ./images/hd_wall2.xpm                  
 
 
 C 0,0,0
-F 240,240,241
+F 240,255,241
 
-1111111111
-1000000001
-1000000001
+1111111111111
+10000000E1
+1000000001111
 1000010001
 1000000001
-10000W0001
+1000000001
 1000000001
 1000000001
 1000000001

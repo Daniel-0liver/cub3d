@@ -6,7 +6,7 @@
 /*   By: dateixei <dateixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 01:52:49 by dateixei          #+#    #+#             */
-/*   Updated: 2023/09/30 13:59:19 by dateixei         ###   ########.fr       */
+/*   Updated: 2023/10/01 17:03:06 by dateixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ typedef struct s_ray
 
 typedef struct s_game
 {
+	int			x;
+	int			y;
 	void		*mlx;
 	void		*mlx_img;
 	char		*mlx_data;
@@ -83,6 +85,7 @@ typedef struct s_game
 	int			error;
 	int			f_color;
 	int			c_color;
+	int			flag;
 	void		*win;
 	t_img		img[NBR_SPRITES];
 	t_element	element;
